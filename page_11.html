@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Năm lớp 11</title>
+
+  <link rel="website icon" type="png" href="images/Logo_lop.png">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/cf0f31fa2c.js" crossorigin="anonymous"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lexend:wght@700;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <style>
+      /* --- GLOBAL VARIABLES --- */
+      :root {
+          --primary-color: #1e293b;
+          --main-bg-color: #f8fafc;
+          --header-height: 90px;
+      }
+
+      body {
+          font-family: 'Be Vietnam Pro', 'Inter', 'Segoe UI', sans-serif;
+          background-color: var(--main-bg-color);
+          margin: 0;
+          padding: 0; 
+          padding-top: var(--header-height);
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+      }
+
+      /* --- HEADER STYLES --- */
+      .site-header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: var(--header-height);
+          background: rgba(255, 255, 255, 0.75); 
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          border-bottom: 1px solid rgba(0,0,0,0.05);
+          z-index: 1000;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0 40px;
+          box-sizing: border-box;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+          transition: all 0.3s ease;
+      }
+
+      .header-logo {
+          height: 100%;
+          display: flex;
+          align-items: center;
+          text-decoration: none;
+      }
+      
+      .header-logo-img {
+          height: auto;
+          max-height: 70%;
+          width: auto;
+          object-fit: contain;
+          display: block;
+      }
+
+      .main-nav {
+          display: flex;
+          gap: 30px;
+      }
+
+      .nav-link {
+          text-decoration: none;
+          color: #64748b;
+          font-weight: 600;
+          font-size: 14px;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          transition: color 0.2s;
+          position: relative;
+      }
+
+      .nav-link:hover {
+          color: var(--primary-color);
+      }
+
+      .nav-link::after {
+          content: '';
+          position: absolute;
+          bottom: -5px;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background: #3b82f6;
+          transition: width 0.3s ease;
+      }
+
+      .nav-link:hover::after {
+          width: 100%;
+      }
+
+      /* --- FOOTER STYLES --- */
+      .site-footer {
+          background-color: var(--primary-color);
+          color: #cbd5e1;
+          padding: 60px 20px 30px;
+          margin-top: auto; 
+      }
+
+      .footer-content {
+          max-width: 1200px;
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: 1.5fr 1fr 1fr;
+          gap: 40px;
+          border-bottom: 1px solid rgba(255,255,255,0.1);
+          padding-bottom: 40px;
+          margin-bottom: 30px;
+      }
+
+      .footer-column h3 {
+          color: white;
+          font-family: 'Lexend', sans-serif;
+          font-size: 18px;
+          margin-top: 0;
+          margin-bottom: 20px;
+      }
+
+      .footer-desc {
+          line-height: 1.6;
+          font-size: 14px;
+          max-width: 300px;
+      }
+
+      .footer-links {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+      }
+
+      .footer-links li {
+          margin-bottom: 12px;
+      }
+
+      .footer-links a {
+          color: #cbd5e1;
+          text-decoration: none;
+          transition: color 0.2s;
+          font-size: 14px;
+      }
+
+      .footer-links a:hover {
+          color: white;
+          padding-left: 5px;
+      }
+
+      .feedback-box {
+          width: 100%;
+          padding: 10px;
+          border-radius: 6px;
+          border: 1px solid #475569;
+          background: #334155;
+          color: white;
+          margin-top: 10px;
+          resize: vertical;
+          font-family: 'Be Vietnam Pro', sans-serif;
+          font-size: 13px;
+          box-sizing: border-box;
+      }
+      
+      .feedback-box::placeholder { color: #94a3b8; }
+      .feedback-box:focus { outline: none; border-color: #3b82f6; }
+
+      .feedback-btn {
+          margin-top: 8px;
+          padding: 6px 16px;
+          background: #3b82f6;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 12px;
+          font-weight: 600;
+          transition: background 0.2s;
+      }
+      .feedback-btn:hover { background: #2563eb; }
+
+      .footer-bottom {
+          text-align: center;
+          font-size: 13px;
+          color: #64748b;
+      }
+
+      /* --- MOBILE RESPONSIVE --- */
+      @media (max-width: 768px) {
+          .site-header {
+              flex-direction: column;
+              height: auto;
+              padding: 15px 20px;
+              gap: 15px;
+          }
+          
+          .header-logo-img {
+              max-height: 50px; 
+          }
+
+          .main-nav {
+              width: 100%;
+              justify-content: center;
+              gap: 15px;
+              flex-wrap: wrap;
+          }
+
+          .nav-link {
+              font-size: 12px;
+              padding: 5px 8px;
+              background: #f1f5f9;
+              border-radius: 6px;
+          }
+          .nav-link::after { display: none; }
+
+          body { padding-top: 130px; }
+
+          .footer-content {
+              grid-template-columns: 1fr;
+              gap: 30px;
+              text-align: left;
+          }
+          .footer-desc { margin: 0; }
+      }
+      
+      .banner-container {
+          width: 100%;
+          display: block;
+      }
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+      <a href="trangchu.html" class="header-logo">
+          <img src="img/banner.jpg" alt="Logo 12A2" class="header-logo-img" onerror="this.style.display='none'; this.parentElement.innerHTML='A2<span>K28</span>';">
+      </a>
+      <nav class="main-nav">
+          <a href="lop10.html" class="nav-link">Lớp 10</a>
+          <a href="page_11.html" class="nav-link" style="color: var(--primary-color);">Lớp 11</a>
+          <a href="lop12.html" class="nav-link">Lớp 12</a>
+          <a href="thanhvien.html" class="nav-link">Thành Viên</a>
+          <a href="thayco.html" class="nav-link">Giáo Viên</a>
+      </nav>
+  </header>
+
+  <main>
+
+      <div class="container">
+        <h1>NHỮNG HOẠT ĐỘNG NĂM LỚP 11</h1>
+      </div>
+      
+      <div class="slider-container rope-style">
+          <div class="rope"></div>
+
+          <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+              
+              <div class="swiper-slide photo">
+                <span class="clip"></span>
+                <img src="img/images11_1.jpg">
+              </div>
+
+              <div class="swiper-slide photo">
+                <span class="clip"></span>
+                <img src="img/images11_6.jpg">
+              </div>
+
+              <div class="swiper-slide photo">
+                <span class="clip"></span>
+                <img src="img/images11_2.jpg">
+              </div>
+
+              <div class="swiper-slide photo">
+                <span class="clip"></span>
+                <img src="img/images11_3.jpg">
+              </div>
+
+              <div class="swiper-slide photo">
+                <span class="clip"></span>
+                <img src="img/images11_1.jpg">
+              </div>
+              
+               <div class="swiper-slide photo">
+                <span class="clip"></span>
+                <img src="img/images11_7.jpg">
+              </div>
+
+               <div class="swiper-slide photo">
+                <span class="clip"></span>
+                <img src="img/images11_4.jpg">
+              </div>
+
+               <div class="swiper-slide photo">
+                <span class="clip"></span>
+                <img src="img/images11_5.jpg">
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+      <script>
+          var swiper = new Swiper(".mySwiper", {
+              slidesPerView: "auto",
+              centeredSlides: true, 
+              loop: true,        
+              loopedSlides: 6,   
+              spaceBetween: 0,   
+              grabCursor: true,
+              autoplay: {
+                  delay: 0 ,
+                  disableOnInteraction: false,
+              },
+              speed: 1000 ,
+          });
+      </script>
+
+      <div class="wechoice-grid">
+          <a href="1911.html" class="wechoice-card">
+            <div class="card-header">
+              <div class="card-title-wrap">
+                <div class="vertical-line"></div>
+                <h3 class="card-title">NGÀY QUỐC TẾ NAM GIỚI 19/11/2024</h3>
+              </div>
+              <p class="card-desc">Từ bất ngờ này đến bất ngờ khác, các bạn nữ của Anh 2 đã tạo ra một dịp khó quên đối với các chàng trai</p>
+            </div>
+            <div class="card-image">
+              <img src="img/images11_3.jpg" alt="Ảnh 1">
+              <div class="card-btn">ĐỌC BÀI VIẾT</div>
+            </div>
+          </a>
+
+          <a href="dalat.html" class="wechoice-card">
+            <div class="card-header">
+              <div class="card-title-wrap">
+                <div class="vertical-line"></div>
+                <h3 class="card-title">34 CON NGƯỜI CÙNG TẤN CÔNG ĐÀ LẠT 2024</h3>
+              </div>
+              <p class="card-desc">Tại Đà Lạt mộng mơ, những đứa trẻ của Anh 2, cùng nhau, đã viết nên những kỉ niệm khó quên của chính mình</p>
+            </div>
+            <div class="card-image">
+              <img src="img/dalat1.jpg" alt="Ảnh 2">
+              <div class="card-btn">ĐỌC BÀI VIẾT</div>
+            </div>
+          </a>
+
+          <a href="banhchung.html" class="wechoice-card">
+            <div class="card-header">
+              <div class="card-title-wrap">
+                <div class="vertical-line"></div>
+                <h3 class="card-title">CHIẾC BÁNH CHƯNG GIAN TRUÂN NHẤT</h3>
+              </div>
+              <p class="card-desc">Cứ ngỡ việc nấu bánh chưng thì có gì khó đối với A2 chúng mình, hoá ra lại là kiếp nạn thứ 88... (huhu)</p>
+            </div>
+            <div class="card-image">
+              <img src="img/banhchung1.jpg" alt="Ảnh 3">
+              <div class="card-btn">ĐỌC BÀI VIẾT</div>
+            </div>
+          </a>
+
+          <a href="wc9.html" class="wechoice-card">
+            <div class="card-header">
+              <div class="card-title-wrap">
+                <div class="vertical-line"></div>
+                <h3 class="card-title">MANG NGAY GIẢI NHẤT GĐTH ĐẾN ĐÂY</h3>
+              </div>
+              <p class="card-desc">(quan điểm của người viết) lớp tôi là lớp đỉnh nhất, nhảy hay nhất không có gì quá nhiều để bàn cãi</p>
+            </div>
+            <div class="card-image">
+              <img src="img/6.jpg" alt="Ảnh 4">
+              <div class="card-btn">ĐỌC BÀI VIẾT</div>
+            </div>
+          </a>
+
+          <a href="2010.html" class="wechoice-card">
+            <div class="card-header">
+              <div class="card-title-wrap">
+                <div class="vertical-line"></div>
+                <h3 class="card-title">GỬI NHỮNG LỜI CHÚC ĐẾN CÔNG CHÚA CỦA CHÚNG TỚ</h3>
+              </div>
+              <p class="card-desc">20/10/2024 ghi dấu những món quà của các chàng trai đối với nữa còn lại, mong để lại chút vấn vương</p>
+            </div>
+            <div class="card-image">
+              <img src="img/2010.1.jpg" alt="Ảnh 5">
+              <div class="card-btn">ĐỌC BÀI VIẾT</div>
+            </div>
+          </a>
+
+          <a href="qa.html" class="wechoice-card">
+            <div class="card-header">
+              <div class="card-title-wrap">
+                <div class="vertical-line"></div>
+                <h3 class="card-title">OI ZOI OI TOÁN QUỐC ANH - NHỮNG KÍ ỨC KINH HOÀNG</h3>
+              </div>
+              <p class="card-desc">Những con số nghe thật kinh hoàng, huỷ diệt mọi giấc mơ 9+ toán của A2 (trừ 1 or 2 IYKYK)</p>
+            </div>
+            <div class="card-image">
+              <img src="img/qa1.PNG" alt="Ảnh 6">
+              <div class="card-btn">ĐỌC BÀI VIẾT</div>
+            </div>
+          </a>
+
+          <a href="83.html" class="wechoice-card">
+            <div class="card-header">
+              <div class="card-title-wrap">
+                <div class="vertical-line"></div>
+                <h3 class="card-title">NGÀY CỦA NHỮNG BÔNG HOA XINH ĐẸP NHẤT A2</h3>
+              </div>
+              <p class="card-desc">8/3 ngày mà nữa kia của thế giới sẽ mong cầu những điều tốt đẹp nhất nữa còn lại</p>
+            </div>
+            <div class="card-image">
+              <img src="img/83.1.jpg" alt="Ảnh 7">
+              <div class="card-btn">ĐỌC BÀI VIẾT</div>
+            </div>
+          </a>
+
+          <a href=" wc9.html" class="wechoice-card">
+            <div class="card-header">
+              <div class="card-title-wrap">
+                <div class="vertical-line"></div>
+                <h3 class="card-title">SHOUT OUT FOR ĐỨC ANH AND ANH THƯ!</h3>
+              </div>
+              <p class="card-desc">Sau hàng giờ chuẩn bị, những chiếc cánh kì công nhất cũng khoác lên những người đẹp nhất</p>
+            </div>
+            <div class="card-image">
+              <img src="img/thanhlich6.JPG" alt="Ảnh 7">
+              <div class="card-btn">ĐỌC BÀI VIẾT</div>
+            </div>
+          </a>
+      </div>
+  </main>
+
+  <footer class="site-footer">
+      <div class="footer-content">
+          <div class="footer-column">
+              <h3>VỀ CHÚNG TÔI</h3>
+              <p class="footer-desc">
+                  Trang web lưu giữ những hoạt động, khoảnh khắc và kỷ niệm đáng nhớ của tập thể lớp 12A2 - K28.
+              </p>
+          </div>
+          
+          <div class="footer-column">
+              <h3>LIÊN KẾT NHANH</h3>
+              <ul class="footer-links">
+                  <li><a href="lop10.html">Lớp 10</a></li>
+                  <li><a href="lop11.html">Lớp 11</a></li>
+                  <li><a href="lop12.html">Lớp 12</a></li>
+                  <li><a href="thanhvien.html">Thành Viên</a></li>
+                  <li><a href="thayco.html">Giáo Viên</a></li>
+              </ul>
+          </div>
+          
+          <div class="footer-column">
+              <h3>LIÊN HỆ</h3>
+              <ul class="footer-links">
+                  <li><a href="https://www.facebook.com/tri.dinhquoc.9/" target="_blank">Facebook: 12A2 - K28</a></li>
+                  <li><a href="mailto:a2k28chv@gmail.com">Email: a2k28chv@gmail.com</a></li>
+                  <li><span>SĐT: 0775611279</span></li>
+              </ul>
+              <div style="margin-top: 15px;">
+                  <h4 style="color: white; margin: 0 0 5px 0; font-size: 14px; font-weight: 600;">Góp ý cho lớp:</h4>
+                  
+                  <form class="contact-form" action="https://script.google.com/macros/s/AKfycbwMdtbMEHL3YJnzkD--OZs6nLwjqhv9dKXfqp12mLonj5mBEwIq1czvovqp4eUJlG0/exec" method="post" id="contactForm">
+                      <input type="hidden" name="txtemail" value="Ẩn danh">
+                      <textarea id="txtcomment" name="txtcomment" class="feedback-box" rows="3" placeholder="Nhập lời nhắn..." required></textarea>
+                      <button type="submit" class="feedback-btn">Gửi</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+      <div class="footer-bottom">
+          &copy; 2023 - 2026 12A2 K28. All rights reserved. Made with love.
+      </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById("contactForm");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault(); 
+
+      const fd = new FormData(form);
+
+      try {
+        const res = await fetch(form.action, {
+          method: "POST",
+          body: fd
+        });
+
+        if (!res.ok) throw new Error("Submit failed");
+
+        alert("Đã gửi lời nhắn!");
+        form.reset(); 
+      } catch (err) {
+        console.error(err);
+        alert("Gửi thất bại. Vui lòng thử lại!");
+      }
+    });
+  </script>
+
+</body>
+</html>

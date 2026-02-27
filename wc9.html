@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ký Ức A2</title>
+
+    <style>
+
+        /* Nâng cấp Typography */
+        h3 {
+            font-size: 1.8rem;
+            margin: 40px 0 20px;
+            color: #b8860b;
+            font-style: italic;
+        }
+
+        /* Khung ảnh chuyên nghiệp */
+        .photo-frame {
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: #f9f9f9;
+        }
+
+        .photo-frame img {
+            display: block;
+            width: 100%;
+            height: auto;
+            transition: transform 0.5s ease;
+            margin: 0; /* Ghi đè margin cũ */
+        }
+
+        .photo-frame:hover img {
+            transform: scale(1.03);
+        }
+
+        .caption {
+            display: block;
+            padding: 15px;
+            font-size: 0.9rem;
+            color: #666;
+            text-align: center;
+            background: #fff;
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        .footer-note {
+            margin-top: 60px;
+            text-align: center;
+            font-family: 'Georgia', serif;
+            color: #888;
+            border-top: 1px double #ddd;
+            padding-top: 30px;
+        }
+
+        :root {
+            --primary-color: #fff;
+            --accent-color: #ffd700;
+            --bg-dark: #000;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--primary-color); overflow-x: hidden; }
+
+        /* --- 1. RÈM 3 LỚP (EFFECT 1) --- */
+        .curtain-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            z-index: 100; pointer-events: none;
+        }
+
+        .curtain {
+            position: absolute; top: 0; height: 100%; width: 50%;
+            background-repeat: no-repeat;
+            background-size: 200% 100%; 
+            transition: transform 1.5s cubic-bezier(0.7, 0, 0.3, 1);
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .curtain.left { 
+            left: 0; 
+            background-position: 0% center; 
+            border-right: 1px solid rgba(0,0,0,0.2); 
+        }
+        
+        .curtain.right { 
+            right: 0; 
+            background-position: 100% center; 
+        }
+
+        .c1 { z-index: 103; background-image: url('img/3.jpg'); }
+        .c2 { z-index: 102; transition-delay: 0.2s; background-image: url('img/8.jpg'); }
+        .c3 { z-index: 101; transition-delay: 0.4s; background-image: url('img/6.jpg'); }
+
+        body.loaded .curtain.left { transform: translateX(-100%); }
+        body.loaded .curtain.right { transform: translateX(100%); }
+
+        /* --- 2. SETUP CHO HERO SECTION --- */
+        .intro-track { height: 140vh; position: relative; }
+
+        .sticky-view {
+            position: sticky; top: 0; width: 100%; height: 100vh;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('img/IMG_4506.jpeg'); 
+            background-size: cover; background-position: center;
+            will-change: filter, transform;
+            transition: transform 0.1s linear, filter 0.1s linear; 
+        }
+
+        .dark-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); 
+            opacity: 0;
+            transition: opacity 0.1s linear;
+        }
+
+        .initial-text {
+            position: absolute;
+            top: 20%; left: 50%; transform: translate(-50%, -50%);
+            z-index: 10; font-size: 4rem; font-weight: 900; 
+            letter-spacing: 5px; text-transform: uppercase;
+            color: var(--accent-color); opacity: 0;
+            transition: opacity 1s ease 1.2s; text-align: center;
+            width: 100%; text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        body.loaded .initial-text { opacity: 1; }
+
+        .hero-content {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -40%) scale(0.9); 
+            text-align: center; width: 90%; opacity: 0; z-index: 20;
+            transition: all 0.2s ease-out; 
+        }
+
+        .main-title { font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 800; line-height: 1.1; margin-bottom: 15px;}
+        .sub-txt { color: #ccc; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 10px;}
+        .desc { font-size: 1.1rem; color: #ddd; }
+
+        /* --- 2.5 KHUNG VIDEO NỀN ĐEN --- */
+        .video-section {
+            background-color: #000; 
+            padding: 60px 20px; 
+            position: relative;
+            z-index: 30; 
+            border-top-left-radius: 40px; 
+            border-top-right-radius: 40px;
+            box-shadow: 0 -20px 50px rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center; 
+        }
+
+        .video-wrapper {
+            width: 100%;
+            max-width: 1000px; 
+            position: relative;
+        }
+
+        .video-wrapper video, .video-wrapper iframe {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16/9; 
+            display: block;
+            border: none;
+            background-color: #111; 
+        }
+
+        /* --- 3. ARTICLE BODY --- */
+        .article-body {
+            position: relative; background: #fff; color: #1a1a1a;
+            padding: 80px 20px; z-index: 30; min-height: 100vh;
+            /* Đã di chuyển bo góc (border-radius) và đổ bóng (box-shadow) lên .video-section */
+        }
+        .container { max-width: 800px; margin: 0 auto; }
+        .drop-cap { float: left; font-size: 4rem; line-height: 0.8; font-weight: 900; padding-right: 15px; }
+        p { font-size: 1.2rem; line-height: 1.8; margin-bottom: 20px; text-align: justify; }
+        img { width: 100%; border-radius: 10px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+
+    <div class="curtain-container">
+        <div class="curtain c1 left"></div><div class="curtain c1 right"></div>
+        <div class="curtain c2 left"></div><div class="curtain c2 right"></div>
+        <div class="curtain c3 left"></div><div class="curtain c3 right"></div>
+    </div>
+
+    <div class="intro-track">
+        <div class="sticky-view">
+            <div class="hero-bg" id="heroBg"></div>
+            <div class="dark-overlay" id="darkOverlay"></div>
+            
+            <div class="initial-text" id="initialLabel"></div>
+
+            <div class="hero-content" id="heroContent">
+                <div class="sub-txt">Thanh xuân của chúng tớ</div>
+                <h1 class="main-title">KÝ ỨC A2:<br>GIAI ĐIỆU TUỔI HỒNG 2024</h1>
+                <p class="desc">Hành trình rực rỡ của những kẻ mộng mơ</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="video-section">
+        <div class="video-wrapper">
+            <video controls>
+                <source src="vid/GĐTH.mp4" type="video/mp4">
+                
+            </video>
+        </div>
+    </div>
+
+    <div class="article-body">
+        <div class="container">
+            <p><span class="drop-cap">N</span>gay từ những ngày đầu bước vào lớp 11, rực cháy trong tim mỗi thành viên A2 là ngọn lửa tham vọng chinh phục ngôi vị cao nhất cuộc thi "Giai Điệu Tuổi Hồng". Không chỉ là một tiết mục văn nghệ, đó là lời khẳng định bản sắc của một tập thể đoàn kết.</p>
+            
+            <h3>Khởi đầu từ những con số 0</h3>
+            <p>3 tháng ròng rã – một hành trình đầy gian truân với những buổi tập luyện quên ăn quên ngủ. Dưới bàn tay biên đạo tài hoa của Hà Linh và Gia Linh, bản Mashup "Nấu ăn cho em - Máu đỏ da vàng" đã dần thành hình từ những bước nhảy vụng về nhất.</p>
+            
+            <div class="photo-frame">
+                <img src="img/IMG_4506.jpeg" alt="A2 Performance">
+                <span class="caption">Giây phút chúng tớ rực rỡ</span>
+            </div>
+
+            <h3>Khi áp lực hóa kim cương</h3>
+            <p>Có những lúc tưởng chừng như gục ngã vì lịch học dày đặc và những chấn thương bất ngờ. Nhưng chính tiếng cười đùa trong giờ giải lao, những chiếc bánh chia đôi đã gắn kết 34gia con người thành một khối thống nhất. Chúng tớ học cách lắng nghe nhịp thở của nhau, học cách tin tưởng đồng đội tuyệt đối.</p>
+
+            <div class="photo-frame">
+                <img src="img/IMG_4570.jpeg" alt="A2 on stage">
+                <span class="caption">Khoảnh khắc ánh đèn sân khấu bùng nổ, mọi lo âu dường như tan biến.</span>
+            </div>
+
+            <h3>Hơn cả một giải thưởng</h3>
+            <p>Giây phút cái tên "A2" được xướng lên, không gian như ngưng đọng. Giải thưởng ấy là sự công nhận, nhưng ký ức về những đêm cùng nhau thức muộn, về màu áo thấm đẫm mồ hôi mới là kho báu thực sự mà chúng tớ mang theo suốt cuộc đời. A2 không chỉ là một lớp học, đó là một gia đình.</p>
+            
+            <div class="footer-note">
+                <p>— Viết cho những năm tháng thanh xuân rực rỡ nhất —</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => { document.body.classList.add('loaded'); }, 100);
+        });
+
+        const heroBg = document.getElementById('heroBg');
+        const darkOverlay = document.getElementById('darkOverlay');
+        const heroContent = document.getElementById('heroContent');
+        const initialLabel = document.getElementById('initialLabel');
+
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const vh = window.innerHeight;
+
+            let progress = Math.min(scrollY / (vh * 0.1), 1);
+
+            requestAnimationFrame(() => {
+                heroBg.style.filter = `blur(${progress * 10}px)`;
+                darkOverlay.style.opacity = progress * 0.8;
+                initialLabel.style.transition = 'none';
+                initialLabel.style.opacity = Math.max(0, 1 - (progress * 20));
+
+                heroContent.style.opacity = progress;
+                heroContent.style.transform = `translate(-50%, ${-40 - (progress * 10)}%) scale(${0.9 + (progress * 0.1)})`;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ký Ức A2</title>
+    <style>
+        /* Nâng cấp Typography */
+h3 {
+    font-size: 1.8rem;
+    margin: 40px 0 20px;
+    color: #b8860b;
+    font-style: italic;
+}
+
+/* Khung ảnh chuyên nghiệp */
+.photo-frame {
+    margin: 40px 0;
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    background: #f9f9f9;
+}
+
+.photo-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.5s ease;
+    margin: 0; /* Ghi đè margin cũ */
+}
+
+.photo-frame:hover img {
+    transform: scale(1.03);
+}
+
+.caption {
+    display: block;
+    padding: 15px;
+    font-size: 0.9rem;
+    color: #666;
+    text-align: center;
+    background: #fff;
+    border-bottom: 3px solid var(--accent-color);
+}
+
+.footer-note {
+    margin-top: 60px;
+    text-align: center;
+    font-family: 'Georgia', serif;
+    color: #888;
+    border-top: 1px double #ddd;
+    padding-top: 30px;
+}
+
+/* Hiệu ứng mượt cho bài viết */
+.article-body {
+    background: linear-gradient(to bottom, #ffffff, #f4f4f4);
+}
+
+        :root {
+            --primary-color: #fff;
+            --accent-color: #ffd700;
+            --bg-dark: #000;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--primary-color); overflow-x: hidden; }
+
+        /* --- 1. RÈM 3 LỚP (EFFECT 1) --- */
+        /* --- HIỆU ỨNG RÈM 3 LỚP (MỖI LỚP LÀ 1 ẢNH THỐNG NHẤT) --- */
+        
+        .curtain-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            z-index: 100; pointer-events: none;
+        }
+
+        .curtain {
+            position: absolute; top: 0; height: 100%; width: 50%;
+            background-repeat: no-repeat;
+            
+            /* QUAN TRỌNG: Ảnh to gấp đôi bề ngang của 1 cánh rèm (50% * 2 = 100% màn hình) */
+            background-size: 200% 100%; 
+            
+            transition: transform 1.5s cubic-bezier(0.7, 0, 0.3, 1);
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        /* --- CẤU HÌNH VỊ TRÍ ẢNH (ĐỂ KHỚP NHAU) --- */
+        .curtain.left { 
+            left: 0; 
+            background-position: 0% center; /* Lấy nửa bên trái của ảnh */
+            border-right: 1px solid rgba(0,0,0,0.2); /* Viền mờ ngăn cách */
+        }
+        
+        .curtain.right { 
+            right: 0; 
+            background-position: 100% center; /* Lấy nửa bên phải của ảnh */
+        }
+
+        /* --- CẤU HÌNH ẢNH CHO TỪNG LỚP --- */
+
+        /* LỚP 1 (NGOÀI CÙNG): CỬA GỖ / CỔNG */
+        .c1 { 
+            z-index: 103; 
+            /* Thay ảnh Cổng/Cửa của bạn vào đây */
+            background-image: url('img/QA1.PNG');
+        }
+
+        /* LỚP 2 (GIỮA): RÈM VẢI / TEXTURE */
+        .c2 { 
+            z-index: 102; 
+            transition-delay: 0.2s;
+            /* Thay ảnh Rèm/Vải vào đây */
+            background-image: url('img/QA2.PNG');
+        }
+
+        /* LỚP 3 (TRONG CÙNG): MÂY / NỀN MỜ */
+        .c3 { 
+            z-index: 101; 
+            transition-delay: 0.4s;
+            /* Thay ảnh Nền mờ ảo vào đây */
+            background-image: url('img/QA3.PNG');
+        }
+
+        /* Trigger Animation */
+        body.loaded .curtain.left { transform: translateX(-100%); }
+        body.loaded .curtain.right { transform: translateX(100%); }
+
+        /* --- 2. SETUP CHO HERO SECTION --- */
+        /* Giống file mẫu: Track ngắn lại để cuộn nhanh hơn */
+        .intro-track { height: 140vh; position: relative; }
+
+        .sticky-view {
+            position: sticky; top: 0; width: 100%; height: 100vh;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('img/QA2.PNG'); /* Đổi tên ảnh của bạn nếu cần */
+            background-size: cover; background-position: center;
+            will-change: filter, transform;
+            /* Transition ngắn để mượt hơn khi cuộn nhanh (học từ file mẫu) */
+            transition: transform 0.1s linear, filter 0.1s linear; 
+        }
+
+        .dark-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); /* Đen đậm hơn chút */
+            opacity: 0;
+            transition: opacity 0.1s linear;
+        }
+
+        /* Dòng chữ ban đầu "Giai điệu tuổi hồng" */
+        .initial-text {
+            position: absolute;
+            /* 1. KÉO LÊN CAO: Giảm từ 50% xuống 40% (muốn cao nữa thì giảm xuống 30%) */
+            top: 20%; 
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            
+            /* 2. PHÓNG TO: Tăng từ 1.5rem lên 4rem */
+            font-size: 4rem; 
+            
+            /* Thêm độ dày để chữ đẹp hơn */
+            font-weight: 900; 
+            
+            letter-spacing: 5px; 
+            text-transform: uppercase;
+            color: var(--accent-color);
+            opacity: 0;
+            transition: opacity 1s ease 1.2s; 
+            text-align: center;
+            width: 100%;
+            
+            /* Thêm chút bóng đổ để chữ nổi bật trên nền ảnh */
+            text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        body.loaded .initial-text { opacity: 1; }
+
+        /* Nội dung chính hiện lên sau khi cuộn */
+        .hero-content {
+            position: absolute;
+            top: 50%; left: 50%;
+            /* Setup vị trí ban đầu giống file mẫu: hơi thấp xuống và nhỏ hơn */
+            transform: translate(-50%, -40%) scale(0.9); 
+            text-align: center; width: 90%;
+            opacity: 0;
+            z-index: 20;
+            /* Transition all 0.2s giúp hiệu ứng nảy (snappy) hơn */
+            transition: all 0.2s ease-out; 
+        }
+
+        .main-title { font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 800; line-height: 1.1; margin-bottom: 15px;}
+        .sub-txt { color: #ccc; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 10px;}
+        .desc { font-size: 1.1rem; color: #ddd; }
+
+        /* --- 3. ARTICLE BODY --- */
+        .article-body {
+            position: relative; background: #fff; color: #1a1a1a;
+            padding: 80px 20px; z-index: 30; min-height: 100vh;
+            border-top-left-radius: 40px; border-top-right-radius: 40px;
+            box-shadow: 0 -20px 50px rgba(0,0,0,0.5);
+        }
+        .container { max-width: 800px; margin: 0 auto; }
+        .drop-cap { float: left; font-size: 4rem; line-height: 0.8; font-weight: 900; padding-right: 15px; }
+        p { font-size: 1.2rem; line-height: 1.8; margin-bottom: 20px; text-align: justify; }
+        img { width: 100%; border-radius: 10px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+
+    <div class="curtain-container">
+        <div class="curtain c1 left"></div><div class="curtain c1 right"></div>
+        <div class="curtain c2 left"></div><div class="curtain c2 right"></div>
+        <div class="curtain c3 left"></div><div class="curtain c3 right"></div>
+    </div>
+
+    <div class="intro-track">
+        <div class="sticky-view">
+            <div class="hero-bg" id="heroBg"></div>
+            <div class="dark-overlay" id="darkOverlay"></div>
+            
+            <div class="initial-text" id="initialLabel"></div>
+
+            <div class="hero-content" id="heroContent">
+                <div class="sub-txt">Thanh xuân của chúng tớ</div>
+                <h1 class="main-title">KÝ ỨC A2:<br>NHỮNG BÀI KIỂM TRA TOÁN CỦA THẦY QUỐC ANH</h1>
+                <p class="desc">Hành trình rực rỡ của những kẻ muốn 9 diểm toán</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="article-body">
+        <div class="container">
+    <p><span class="drop-cap">B</span>ài kiểm tra Toán của thầy Quốc Anh chưa bao giờ chỉ là một bài kiểm tra bình thường. Thầy rất công tâm, luôn trân trọng nỗ lực của học sinh và không ngừng thúc đẩy chúng mình vượt qua giới hạn của bản thân. Nhưng cũng chính vì vậy mà điểm số luôn ”vô tình”, lấy điểm 5 đôi khi còn khó hơn cả lên trời !!!!!</p>
+    
+    <h3>Cú sốc chiếc đề siêu ngắn</h3>
+    <p>Đề thầy đôi khi chỉ vỏn vẹn hai câu. Nghe thì nhẹ nhàng, nhưng khi cầm đề trên tay, cảm giác như đang đứng trước cửa địa ngục: đọc đề đã choáng, hiểu đề là chuyện của kiếp sau.
+</p>
+    
+    <div class="photo-frame">
+        <img src="img/QA4.PNG" alt="điểm kiểm tra đến từ địa ngục">
+        <span class="caption">Những con điểm đến từ địa ngục</span>
+    </div>
+
+    <h3>Cuộc đua điểm cộng</h3>
+    <p> Từ lúc nào không hay, tiết Toán trở thành một “chiến trường” thực thụ, nơi điểm cộng là tia hy vọng sống còn để bám víu, khiến chúng mình sẵn sàng xung phong chỉ để kiếm chác thêm chút gì đó. Có những lúc lớp đang im lìm, ai nấy đều cúi đầu khi thầy gọi lên làm bài. Nhưng chỉ cần thầy nói khẽ một câu: “Bài này có điểm cộng nha”, ngay lập tức không khí đổi chiều - những cánh tay giơ lên đầy quyết tâm, kèm theo tiếng “Em! Em!” vang lên đầy hăng hái .</p>
+    <p> Mà buồn thay, điểm cộng của thầy thì nhỏ đến mức không đủ nhét kẽ răng í. Hay có lẽ vì điểm kiểm tra quá thấp, nên nhìn đâu cũng thấy bé? </p>
+
+    <div class="photo-frame">
+        <img src="img/QA5.PNG" alt="vẫn là điểm kiểm tra kinh khủng ấy">
+        <span class="caption">Điểm kiểm tra từ góc nhìn khác</span>
+    </div>
+
+    <h3>Lửa thử vàng gian nan thử sức</h3>
+    <p>Thế nhưng cũng chính nhờ thầy, chúng mình mới hiểu mình cần nỗ lực đến mức nào và học cách giữ cho đầu óc luôn trong trạng thái hoạt động. Đến nỗi sau khi thi học kỳ, chúng mình còn thấy đề thi dễ hơn cả đề thường xuyên của thầy, và điểm học kỳ dù cao hay thấp vẫn là con đường duy nhất để “gỡ gạc” lại những con điểm 6 quắc kia.</p>
+    <p>Nhưng có lẽ, giữa những con điểm thấp ấy, vẫn còn đó một điều an ủi: không ai phải đối mặt một mình. Cả lớp cùng sai, cùng buồn, cùng tự nhủ lần sau sẽ cố gắng hơn. Những tờ giấy đầy gạch đỏ rồi cũng sẽ được cất đi, chỉ còn lại một kỷ niệm “để đời” của tuổi học trò, tuy thất vọng một chút, buồn một chút, nhưng sau này nhớ lại chắc chắn chúng ta vẫn sẽ bật cười vì đã cùng nhau trải qua những tháng ngày khó khăn ấy.</p>
+
+    <div class="footer-note">
+        <p>— Viết cho những năm tháng thanh xuân rực rỡ nhất —</p>
+    </div>
+</div>
+    </div>
+
+    <script>
+        // Trigger mở rèm
+        window.addEventListener('load', () => {
+            setTimeout(() => { document.body.classList.add('loaded'); }, 100);
+        });
+
+        const heroBg = document.getElementById('heroBg');
+        const darkOverlay = document.getElementById('darkOverlay');
+        const heroContent = document.getElementById('heroContent');
+        const initialLabel = document.getElementById('initialLabel');
+
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const vh = window.innerHeight;
+
+            // --- CÔNG THỨC SNAPPY (GIỐNG FILE MẪU) ---
+            // Chỉ cần cuộn 15% màn hình (vh * 0.15) là hiệu ứng hoàn tất
+            // Điều này tạo cảm giác "chỉ một cái kéo chuột" là xong ngay.
+            let progress = Math.min(scrollY / (vh * 0.1), 1);
+
+            requestAnimationFrame(() => {
+                // 1. Ảnh nền blur nhanh
+                heroBg.style.filter = `blur(${progress * 10}px)`;
+                
+                // 2. Overlay đen hiện lên
+                darkOverlay.style.opacity = progress * 0.8;
+                initialLabel.style.transition = 'none';
+
+                // 3. Chữ "Giai điệu tuổi hồng" biến mất cực nhanh
+                // Khi progress đạt 0.5 (cuộn 7.5% màn hình) là chữ này đã mất rồi
+                initialLabel.style.opacity = Math.max(0, 1 - (progress * 20));
+
+                // 4. Nội dung chính hiện lên (từ dưới lên và phóng to nhẹ)
+                // Copy logic transform từ file mẫu để có độ nảy
+                heroContent.style.opacity = progress;
+                // Di chuyển từ translate(-50%, -40%) về translate(-50%, -50%)
+                // Scale từ 0.9 lên 1.0
+                heroContent.style.transform = `translate(-50%, ${-40 - (progress * 10)}%) scale(${0.9 + (progress * 0.1)})`;
+            });
+        });
+    </script>
+</body>
+</html>
