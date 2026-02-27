@@ -3,74 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ký Ức A2</title>
+    <title>Ký Ức A2 - Quốc tế Phụ nữ 8/3</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lexend:wght@700;900&display=swap" rel="stylesheet">
+
     <style>
-        /* Nâng cấp Typography */
-h3 {
-    font-size: 1.8rem;
-    margin: 40px 0 20px;
-    color: #b8860b;
-    font-style: italic;
-}
-
-/* Khung ảnh chuyên nghiệp */
-.photo-frame {
-    margin: 40px 0;
-    position: relative;
-    overflow: hidden;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    background: #f9f9f9;
-}
-
-.photo-frame img {
-    display: block;
-    width: 100%;
-    height: auto;
-    transition: transform 0.5s ease;
-    margin: 0; /* Ghi đè margin cũ */
-}
-
-.photo-frame:hover img {
-    transform: scale(1.03);
-}
-
-.caption {
-    display: block;
-    padding: 15px;
-    font-size: 0.9rem;
-    color: #666;
-    text-align: center;
-    background: #fff;
-    border-bottom: 3px solid var(--accent-color);
-}
-
-.footer-note {
-    margin-top: 60px;
-    text-align: center;
-    font-family: 'Georgia', serif;
-    color: #888;
-    border-top: 1px double #ddd;
-    padding-top: 30px;
-}
-
-/* Hiệu ứng mượt cho bài viết */
-.article-body {
-    background: linear-gradient(to bottom, #ffffff, #f4f4f4);
-}
-
+        /* --- GLOBAL VARIABLES --- */
         :root {
-            --primary-color: #fff;
+            --primary-color: #1e293b;
+            --main-bg-color: #f8fafc;
+            --header-height: 90px;
+            --wc9-primary-color: #fff;
             --accent-color: #ffd700;
             --bg-dark: #000;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background-color: var(--bg-dark); color: var(--primary-color); overflow-x: hidden; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
 
-        /* --- 1. RÈM 3 LỚP (EFFECT 1) --- */
-        /* --- HIỆU ỨNG RÈM 3 LỚP (MỖI LỚP LÀ 1 ẢNH THỐNG NHẤT) --- */
+        body {
+            font-family: 'Be Vietnam Pro', 'Inter', 'Segoe UI', sans-serif;
+            background-color: var(--bg-dark); 
+            color: var(--wc9-primary-color);
+            margin: 0;
+            padding: 0; 
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* --- HEADER STYLES --- */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            background: rgba(255, 255, 255, 0.75); 
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            box-sizing: border-box;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            
+            /* Giấu header lên trên mép màn hình */
+            transform: translateY(-100%); 
+            transition: transform 0.4s ease, background 0.3s;
+        }
+
+        .site-header.show {
+            transform: translateY(0);
+        }
+
+        .header-logo {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
         
+        .header-logo-img {
+            height: auto;
+            max-height: 70%;
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #64748b;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #3b82f6;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* --- NỘI DUNG CHÍNH --- */
+        main { flex: 1; }
+
+        h3 {
+            font-size: 1.8rem;
+            margin: 40px 0 20px;
+            color: #b8860b;
+            font-style: italic;
+        }
+
+        /* Khung ảnh chuyên nghiệp */
+        .photo-frame {
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: #f9f9f9;
+        }
+
+        .photo-frame img {
+            display: block;
+            width: 100%;
+            height: auto;
+            transition: transform 0.5s ease;
+            margin: 0; 
+        }
+
+        .photo-frame:hover img {
+            transform: scale(1.03);
+        }
+
+        .caption {
+            display: block;
+            padding: 15px;
+            font-size: 0.9rem;
+            color: #666;
+            text-align: center;
+            background: #fff;
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        .footer-note {
+            margin-top: 60px;
+            text-align: center;
+            font-family: 'Georgia', serif;
+            color: #888;
+            border-top: 1px double #ddd;
+            padding-top: 30px;
+        }
+
+        /* --- 1. RÈM 3 LỚP --- */
         .curtain-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
             z-index: 100; pointer-events: none;
@@ -79,57 +176,30 @@ h3 {
         .curtain {
             position: absolute; top: 0; height: 100%; width: 50%;
             background-repeat: no-repeat;
-            
-            /* QUAN TRỌNG: Ảnh to gấp đôi bề ngang của 1 cánh rèm (50% * 2 = 100% màn hình) */
             background-size: 200% 100%; 
-            
             transition: transform 1.5s cubic-bezier(0.7, 0, 0.3, 1);
             box-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
 
-        /* --- CẤU HÌNH VỊ TRÍ ẢNH (ĐỂ KHỚP NHAU) --- */
         .curtain.left { 
             left: 0; 
-            background-position: 0% center; /* Lấy nửa bên trái của ảnh */
-            border-right: 1px solid rgba(0,0,0,0.2); /* Viền mờ ngăn cách */
+            background-position: 0% center; 
+            border-right: 1px solid rgba(0,0,0,0.2); 
         }
         
         .curtain.right { 
             right: 0; 
-            background-position: 100% center; /* Lấy nửa bên phải của ảnh */
+            background-position: 100% center; 
         }
 
-        /* --- CẤU HÌNH ẢNH CHO TỪNG LỚP --- */
+        .c1 { z-index: 103; background-image: url('img/831.jpg'); }
+        .c2 { z-index: 102; transition-delay: 0.2s; background-image: url('img/832.jpg'); }
+        .c3 { z-index: 101; transition-delay: 0.4s; background-image: url('img/833.jpg'); }
 
-        /* LỚP 1 (NGOÀI CÙNG): CỬA GỖ / CỔNG */
-        .c1 { 
-            z-index: 103; 
-            /* Thay ảnh Cổng/Cửa của bạn vào đây */
-            background-image: url('img/831.jpg');
-        }
-
-        /* LỚP 2 (GIỮA): RÈM VẢI / TEXTURE */
-        .c2 { 
-            z-index: 102; 
-            transition-delay: 0.2s;
-            /* Thay ảnh Rèm/Vải vào đây */
-            background-image: url('img/832.jpg');
-        }
-
-        /* LỚP 3 (TRONG CÙNG): MÂY / NỀN MỜ */
-        .c3 { 
-            z-index: 101; 
-            transition-delay: 0.4s;
-            /* Thay ảnh Nền mờ ảo vào đây */
-            background-image: url('img/833.jpg');
-        }
-
-        /* Trigger Animation */
         body.loaded .curtain.left { transform: translateX(-100%); }
         body.loaded .curtain.right { transform: translateX(100%); }
 
         /* --- 2. SETUP CHO HERO SECTION --- */
-        /* Giống file mẫu: Track ngắn lại để cuộn nhanh hơn */
         .intro-track { height: 140vh; position: relative; }
 
         .sticky-view {
@@ -139,58 +209,34 @@ h3 {
 
         .hero-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('img/IMG_4506.jpeg'); /* Đổi tên ảnh của bạn nếu cần */
+            background-image: url('img/831.jpg'); 
             background-size: cover; background-position: center;
             will-change: filter, transform;
-            /* Transition ngắn để mượt hơn khi cuộn nhanh (học từ file mẫu) */
             transition: transform 0.1s linear, filter 0.1s linear; 
         }
 
         .dark-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8); /* Đen đậm hơn chút */
+            background: rgba(0,0,0,0.8); 
             opacity: 0;
             transition: opacity 0.1s linear;
         }
 
-        /* Dòng chữ ban đầu "Giai điệu tuổi hồng" */
         .initial-text {
             position: absolute;
-            /* 1. KÉO LÊN CAO: Giảm từ 50% xuống 40% (muốn cao nữa thì giảm xuống 30%) */
-            top: 20%; 
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 10;
-            
-            /* 2. PHÓNG TO: Tăng từ 1.5rem lên 4rem */
-            font-size: 4rem; 
-            
-            /* Thêm độ dày để chữ đẹp hơn */
-            font-weight: 900; 
-            
-            letter-spacing: 5px; 
-            text-transform: uppercase;
-            color: var(--accent-color);
-            opacity: 0;
-            transition: opacity 1s ease 1.2s; 
-            text-align: center;
-            width: 100%;
-            
-            /* Thêm chút bóng đổ để chữ nổi bật trên nền ảnh */
-            text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            top: 20%; left: 50%; transform: translate(-50%, -50%);
+            z-index: 10; font-size: 4rem; font-weight: 900; 
+            letter-spacing: 5px; text-transform: uppercase;
+            color: var(--accent-color); opacity: 0;
+            transition: opacity 1s ease 1.2s; text-align: center;
+            width: 100%; text-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
         body.loaded .initial-text { opacity: 1; }
 
-        /* Nội dung chính hiện lên sau khi cuộn */
         .hero-content {
-            position: absolute;
-            top: 50%; left: 50%;
-            /* Setup vị trí ban đầu giống file mẫu: hơi thấp xuống và nhỏ hơn */
+            position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -40%) scale(0.9); 
-            text-align: center; width: 90%;
-            opacity: 0;
-            z-index: 20;
-            /* Transition all 0.2s giúp hiệu ứng nảy (snappy) hơn */
+            text-align: center; width: 90%; opacity: 0; z-index: 20;
             transition: all 0.2s ease-out; 
         }
 
@@ -200,71 +246,187 @@ h3 {
 
         /* --- 3. ARTICLE BODY --- */
         .article-body {
-            position: relative; background: #fff; color: #1a1a1a;
-            padding: 80px 20px; z-index: 30; min-height: 100vh;
-            border-top-left-radius: 40px; border-top-right-radius: 40px;
+            position: relative; 
+            background: linear-gradient(to bottom, #ffffff, #f4f4f4); 
+            color: #1a1a1a;
+            padding: 80px 20px; 
+            z-index: 30; 
+            min-height: 100vh;
+            border-top-left-radius: 40px; 
+            border-top-right-radius: 40px;
             box-shadow: 0 -20px 50px rgba(0,0,0,0.5);
         }
         .container { max-width: 800px; margin: 0 auto; }
         .drop-cap { float: left; font-size: 4rem; line-height: 0.8; font-weight: 900; padding-right: 15px; }
-        p { font-size: 1.2rem; line-height: 1.8; margin-bottom: 20px; text-align: justify; }
-        img { width: 100%; border-radius: 10px; margin: 20px 0; }
+        .article-body p { font-size: 1.2rem; line-height: 1.8; margin-bottom: 20px; text-align: justify; }
+        .article-body img { width: 100%; border-radius: 10px; margin: 20px 0; }
+
+        /* --- FOOTER STYLES --- */
+        .site-footer {
+            background-color: var(--primary-color);
+            color: #cbd5e1;
+            padding: 60px 20px 30px;
+            margin-top: auto;
+            position: relative;
+            z-index: 30;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            color: white;
+            font-family: 'Lexend', sans-serif;
+            font-size: 18px;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .footer-desc { line-height: 1.6; font-size: 14px; max-width: 300px; }
+        .footer-links { list-style: none; padding: 0; margin: 0; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: #cbd5e1; text-decoration: none; transition: color 0.2s; font-size: 14px; }
+        .footer-links a:hover { color: white; padding-left: 5px; }
+
+        .feedback-box {
+            width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #475569;
+            background: #334155; color: white; margin-top: 10px; resize: vertical;
+            font-family: 'Be Vietnam Pro', sans-serif; font-size: 13px; box-sizing: border-box;
+        }
+        .feedback-box::placeholder { color: #94a3b8; }
+        .feedback-box:focus { outline: none; border-color: #3b82f6; }
+
+        .feedback-btn {
+            margin-top: 8px; padding: 6px 16px; background: #3b82f6; color: white;
+            border: none; border-radius: 4px; cursor: pointer; font-size: 12px;
+            font-weight: 600; transition: background 0.2s;
+        }
+        .feedback-btn:hover { background: #2563eb; }
+        .footer-bottom { text-align: center; font-size: 13px; color: #64748b; }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .site-header { flex-direction: column; height: auto; padding: 15px 20px; gap: 15px; }
+            .header-logo-img { max-height: 50px; }
+            .main-nav { width: 100%; justify-content: center; gap: 15px; flex-wrap: wrap; }
+            .nav-link { font-size: 12px; padding: 5px 8px; background: #f1f5f9; border-radius: 6px; }
+            .nav-link::after { display: none; }
+            .footer-content { grid-template-columns: 1fr; gap: 30px; text-align: left; }
+            .footer-desc { margin: 0; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="curtain-container">
-        <div class="curtain c1 left"></div><div class="curtain c1 right"></div>
-        <div class="curtain c2 left"></div><div class="curtain c2 right"></div>
-        <div class="curtain c3 left"></div><div class="curtain c3 right"></div>
-    </div>
+    <header class="site-header">
+        <a href="#" class="header-logo">
+            <img src="img/banner.png" alt="Logo 12A2" class="header-logo-img" onerror="this.style.display='none'; this.parentElement.innerHTML='A2<span>K28</span>';">
+        </a>
+        <nav class="main-nav">
+            <a href="#" class="nav-link">Lớp 10</a>
+            <a href="#" class="nav-link">Lớp 11</a>
+            <a href="#" class="nav-link">Lớp 12</a>
+            <a href="#" class="nav-link" style="color: var(--primary-color);">Thành Viên</a>
+            <a href="#" class="nav-link">Giáo Viên</a>
+        </nav>
+    </header>
 
-    <div class="intro-track">
-        <div class="sticky-view">
-            <div class="hero-bg" id="heroBg"></div>
-            <div class="dark-overlay" id="darkOverlay"></div>
-            
-            <div class="initial-text" id="initialLabel"></div>
+    <main>
+        <div class="curtain-container">
+            <div class="curtain c1 left"></div><div class="curtain c1 right"></div>
+            <div class="curtain c2 left"></div><div class="curtain c2 right"></div>
+            <div class="curtain c3 left"></div><div class="curtain c3 right"></div>
+        </div>
 
-            <div class="hero-content" id="heroContent">
-                <div class="sub-txt">Thanh xuân của chúng tớ</div>
-                <h1 class="main-title">KÝ ỨC A2:<br>QUỐC TẾ PHỤ NỮ 8/3</h1>
-                <p class="desc">Hành trình rực rỡ của những kẻ mộng mơ</p>
+        <div class="intro-track">
+            <div class="sticky-view">
+                <div class="hero-bg" id="heroBg"></div>
+                <div class="dark-overlay" id="darkOverlay"></div>
+                
+                <div class="initial-text" id="initialLabel"></div>
+
+                <div class="hero-content" id="heroContent">
+                    <div class="sub-txt">Thanh xuân của chúng tớ</div>
+                    <h1 class="main-title">KÝ ỨC A2:<br>QUỐC TẾ PHỤ NỮ 8/3</h1>
+                    <p class="desc">Hành trình rực rỡ của những kẻ mộng mơ</p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="article-body">
-        <div class="container">
-    <p><span class="drop-cap">H</span>ôm ấy, những cành “thỏ” xinh xinh đã được trao tận tay những đóa hồng rực rỡ nhất - không chỉ là món quà của ngày 8/3, mà còn là sự trân trọng, yêu thương được gửi gắm bằng tất cả chân thành. 8/3 của các bạn nữ 11A2 chắc chắn sẽ không thể trọn vẹn nếu thiếu đi những con người tận tụy, chu đáo và tinh tế ấy, những người đã âm thầm chuẩn bị, quan tâm từng chi tiết nhỏ, chỉ mong đổi lại là nụ cười rạng rỡ trên môi mỗi đóa hồng của A2.</p>
-    
-    <h3>Giữa những ngày chẳng như ý</h3>
-    <p>“Anh hai say trai” nói không với việc để những nụ cười ấy nhạt phai. Không chỉ trong ngày đặc biệt này, mà còn trong những khoảnh khắc rất đỗi bình thường của tuổi học trò: khi áp lực học tập chồng chất, khi cảm xúc bỗng dưng trùng xuống, hay khi có ai đó tự hỏi “Sao dạo này chẳng có gì như ý mình hết vậy ta?”. Thì hãy nhớ rằng, “Anh hai say trai” vẫn luôn ở đó, vẫn luôn tin rằng các bạn là những người tuyệt vời nhất, xứng đáng được yêu thương, được trân trọng nhất.</p>
-    
-    <div class="photo-frame">
-        <img src="img/832.jpg" alt="A2 Flowers">
-        <span class="caption">Những nụ cười rực rỡ tháng Ba</span>
-    </div>
+        <div class="article-body">
+            <div class="container">
+                <p><span class="drop-cap">H</span>ôm ấy, những cành “thỏ” xinh xinh đã được trao tận tay những đóa hồng rực rỡ nhất - không chỉ là món quà của ngày 8/3, mà còn là sự trân trọng, yêu thương được gửi gắm bằng tất cả chân thành. 8/3 của các bạn nữ 11A2 chắc chắn sẽ không thể trọn vẹn nếu thiếu đi những con người tận tụy, chu đáo và tinh tế ấy, những người đã âm thầm chuẩn bị, quan tâm từng chi tiết nhỏ, chỉ mong đổi lại là nụ cười rạng rỡ trên môi mỗi đóa hồng của A2.</p>
+                
+                <h3>Giữa những ngày chẳng như ý</h3>
+                <p>“Anh hai say trai” nói không với việc để những nụ cười ấy nhạt phai. Không chỉ trong ngày đặc biệt này, mà còn trong những khoảnh khắc rất đỗi bình thường của tuổi học trò: khi áp lực học tập chồng chất, khi cảm xúc bỗng dưng trùng xuống, hay khi có ai đó tự hỏi “Sao dạo này chẳng có gì như ý mình hết vậy ta?”. Thì hãy nhớ rằng, “Anh hai say trai” vẫn luôn ở đó, vẫn luôn tin rằng các bạn là những người tuyệt vời nhất, xứng đáng được yêu thương, được trân trọng nhất.</p>
+                
+                <div class="photo-frame">
+                    <img src="img/834.jpg" alt="A2 Flowers">
+                    <span class="caption">Những nụ cười rực rỡ tháng Ba</span>
+                </div>
 
-    <h3>Mỗi người một sắc hoa</h3>
-    <p>Các bạn - những 🌷 của 11A2 - mỗi người đều mang một vẻ đẹp riêng, một sắc màu riêng, và chính điều đó đã làm nên một tập thể A2 tràn trề nhựa sống và sức trẻ. Dù có lúc mạnh mẽ, có lúc yếu lòng, thì các bạn vẫn luôn là những người dám cố gắng, dám mơ ước và dám sống hết mình với tuổi trẻ của mình.</p>
+                <h3>Mỗi người một sắc hoa</h3>
+                <p>Các bạn - những 🌷 của 11A2 - mỗi người đều mang một vẻ đẹp riêng, một sắc màu riêng, và chính điều đó đã làm nên một tập thể A2 tràn trề nhựa sống và sức trẻ. Dù có lúc mạnh mẽ, có lúc yếu lòng, thì các bạn vẫn luôn là những người dám cố gắng, dám mơ ước và dám sống hết mình với tuổi trẻ của mình.</p>
 
-    <div class="photo-frame">
-        <img src="img/833.jpg" alt="A2 Flower Caretaker">
-        <span class="caption">Hậu phương vững chắc của những đóa hoa A2</span>
-    </div>
+                <div class="photo-frame">
+                    <img src="img/835.jpg" alt="A2 Flower Caretaker">
+                    <span class="caption">Hậu phương vững chắc của những đóa hoa A2</span>
+                </div>
 
-    <h3>Tin mình giữa hành trình lớn lên</h3>
-    <p>Hãy tin tưởng vào bản thân, tin vào những gì mình đang làm, và đừng ngần ngại theo đuổi đam mê cháy bỏng trong tim. Mong rằng không chỉ trong ngày 8/3, mà trong tất cả những ngày còn lại của tuổi trẻ, các bạn nữ 11A2 sẽ luôn được yêu thương, được nâng niu và tự hào vì là chính mình. </p>
-    
-    <div class="footer-note">
-        <p>— Viết cho những năm tháng thanh xuân rực rỡ nhất —</p>
-    </div>
-</div>
-    </div>
+                <h3>Tin mình giữa hành trình lớn lên</h3>
+                <p>Hãy tin tưởng vào bản thân, tin vào những gì mình đang làm, và đừng ngần ngại theo đuổi đam mê cháy bỏng trong tim. Mong rằng không chỉ trong ngày 8/3, mà trong tất cả những ngày còn lại của tuổi trẻ, các bạn nữ 11A2 sẽ luôn được yêu thương, được nâng niu và tự hào vì là chính mình. </p>
+                
+                <div class="footer-note">
+                    <p>— Viết cho những năm tháng thanh xuân rực rỡ nhất —</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>VỀ CHÚNG TÔI</h3>
+                <p class="footer-desc"></p>
+            </div>
+            
+            <div class="footer-column">
+                <h3>LIÊN KẾT NHANH</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Lớp 10</a></li>
+                    <li><a href="#">Lớp 11</a></li>
+                    <li><a href="#">Lớp 12</a></li>
+                    <li><a href="#">Thành Viên</a></li>
+                    <li><a href="#">Giáo Viên</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>LIÊN HỆ</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Facebook: 12A2 - K28</a></li>
+                </ul>
+                <div style="margin-top: 15px;">
+                    <h4 style="color: white; margin: 0 0 5px 0; font-size: 14px; font-weight: 600;">Góp ý cho lớp:</h4>
+                    <textarea class="feedback-box" rows="3" placeholder="Nhập lời nhắn..."></textarea>
+                    <button class="feedback-btn">Gửi</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2023 - 2026 12A2 K28. All rights reserved. Made with love.
+        </div>
+    </footer>
 
     <script>
-        // Trigger mở rèm
         window.addEventListener('load', () => {
             setTimeout(() => { document.body.classList.add('loaded'); }, 100);
         });
@@ -273,34 +435,32 @@ h3 {
         const darkOverlay = document.getElementById('darkOverlay');
         const heroContent = document.getElementById('heroContent');
         const initialLabel = document.getElementById('initialLabel');
+        const siteHeader = document.querySelector('.site-header');
 
         window.addEventListener('scroll', () => {
             const scrollY = window.scrollY;
             const vh = window.innerHeight;
 
-            // --- CÔNG THỨC SNAPPY (GIỐNG FILE MẪU) ---
-            // Chỉ cần cuộn 15% màn hình (vh * 0.15) là hiệu ứng hoàn tất
-            // Điều này tạo cảm giác "chỉ một cái kéo chuột" là xong ngay.
+            // Xử lý hiện thanh Header khi cuộn qua 90% màn hình
+            if (scrollY > vh * 0.9) {
+                siteHeader.classList.add('show');
+            } else {
+                siteHeader.classList.remove('show');
+            }
+
             let progress = Math.min(scrollY / (vh * 0.1), 1);
 
             requestAnimationFrame(() => {
-                // 1. Ảnh nền blur nhanh
-                heroBg.style.filter = `blur(${progress * 10}px)`;
-                
-                // 2. Overlay đen hiện lên
-                darkOverlay.style.opacity = progress * 0.8;
-                initialLabel.style.transition = 'none';
-
-                // 3. Chữ "Giai điệu tuổi hồng" biến mất cực nhanh
-                // Khi progress đạt 0.5 (cuộn 7.5% màn hình) là chữ này đã mất rồi
-                initialLabel.style.opacity = Math.max(0, 1 - (progress * 20));
-
-                // 4. Nội dung chính hiện lên (từ dưới lên và phóng to nhẹ)
-                // Copy logic transform từ file mẫu để có độ nảy
-                heroContent.style.opacity = progress;
-                // Di chuyển từ translate(-50%, -40%) về translate(-50%, -50%)
-                // Scale từ 0.9 lên 1.0
-                heroContent.style.transform = `translate(-50%, ${-40 - (progress * 10)}%) scale(${0.9 + (progress * 0.1)})`;
+                if(heroBg) heroBg.style.filter = `blur(${progress * 10}px)`;
+                if(darkOverlay) darkOverlay.style.opacity = progress * 0.8;
+                if(initialLabel) {
+                    initialLabel.style.transition = 'none';
+                    initialLabel.style.opacity = Math.max(0, 1 - (progress * 20));
+                }
+                if(heroContent) {
+                    heroContent.style.opacity = progress;
+                    heroContent.style.transform = `translate(-50%, ${-40 - (progress * 10)}%) scale(${0.9 + (progress * 0.1)})`;
+                }
             });
         });
     </script>
